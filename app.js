@@ -10,12 +10,15 @@ const PORT = process.env.PORT || 7000
 
 app.use(express.json());
 
+//For Swagger UI API documentation
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
+//This will show a heading in the front page if the app.js works
 app.get('/', (req, res) => {
   res.send('<h1>This is the front page</h1>')
 })
 
+//Collection of routers
 app.use(userRouter);
 app.use(authRouter);
 app.use(postRouter);

@@ -1,5 +1,7 @@
 const { validationResult } = require('express-validator');
 
+//Validators pack to show errors
+
 const validResult = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {

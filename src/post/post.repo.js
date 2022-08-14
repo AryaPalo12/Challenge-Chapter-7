@@ -1,6 +1,7 @@
-const { where } = require('sequelize/types');
 const { Posts } = require('../database/models');
+const { Op } = require('sequelize')
 
+//Create new post
 const createPost = async (title, imageUrl, body, user_id) => {
   return await Posts.create({
     title,
@@ -10,10 +11,23 @@ const createPost = async (title, imageUrl, body, user_id) => {
   });
 }
 
+//Aditional function for sort search and pagination
+const getPostAditional = async (search, sort, page, limit) => {
+  const founded = await Posts.findAll({ offset: page, limit: limit, where: {
+    title: {
+      [Op.iLike]: `%${search}%`,
+    }
+  },order:[
+    ['title',sort],
+  ]},{ })
+  return founded;
+}
+
 const getPostByWriter = async (user_id) => {
   return await Posts.findAll({ where: {user_id}, raw: true})
 }
 
+//Repo function to find post to update
 const getOnePost = async (id) => {
   return await Posts.findOne({ where: { id }, raw: true })
 }
@@ -35,7 +49,6 @@ const updatePost = async (id, title, imageUrl, body) => {
       }
     }
   )
-
 }
 
 const postRepo = {
@@ -43,7 +56,8 @@ const postRepo = {
   getOnePost,
   getAllPost,
   updatePost,
-  getPostByWriter
+  getPostByWriter,
+  getPostAditional,
 }
 
 module.exports = postRepo;

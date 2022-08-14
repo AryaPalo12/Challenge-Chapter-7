@@ -1,5 +1,7 @@
 const { body, params } = require('express-validator');
 
+//Contains simple validators for registration, login ,and post
+
 const registrationValidation = {
   fullname: {
     in: ['body'],
@@ -31,7 +33,11 @@ const loginValidation = {
   password: {
     in: ['body'],
     errorMessage: 'Wrong Password Input',
+    isLength: {
+      options: { min: 8 },
+      options: { max: 15 }
   }
+}
 }
 
 const postValidator = {
@@ -53,12 +59,13 @@ const postValidator = {
       options: {max: 150}
     }
   },
-  password: {
+  body: {
     in: ['body'],
-    errorMessage: 'Article Must contains text inside',
+    isString: true,
+    errorMessage:'Article must not be empty.',
     isLength: {
       options: {min: 1},
-      options: { max: 225 }
+      options: {max: 225}
     }
   }
 }

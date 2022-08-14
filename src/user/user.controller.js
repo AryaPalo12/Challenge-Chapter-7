@@ -7,7 +7,6 @@ const createUser = async (req, res) => {
     email,
     password
   }
-  console.log(object)
   try {
     const createdUser = await userServices.createUser(object);
     return res.status(200).json(createdUser);

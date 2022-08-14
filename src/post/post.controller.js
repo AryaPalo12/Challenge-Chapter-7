@@ -2,9 +2,14 @@ const postServices = require("./post.service");
 const jwt = require('jsonwebtoken');
 
 const getPost = async (req, res) => {
-  const params = req.params
+  const params = req.params;
+  const { search, sort, page, limit } = req.query;
   try {
-    if (params.userId != undefined) {
+    if(search || sort || page || limit){
+      const queriedPost = await postServices.getPostAditional(search, sort, page, limit);
+      return res.json(queriedPost)
+    }
+    if (params.writerId != undefined) {
       const postfound = await postServices.getPostByWriter(params.writerId);
       return res.json(postfound)
     } else {

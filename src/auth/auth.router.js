@@ -33,6 +33,7 @@ const authControllers = require('./auth.controller');
  *              properties:
  *                accessToken:
  *                  type: string
+ *                  example: fdkaskfjhasfhwibfiwnafkasjndfliuaenowanfiuwankjfanksflia
  */
 authRouter.post('/auth/login', checkSchema(validators.loginValidation), validResult, authControllers.userLogin);
 

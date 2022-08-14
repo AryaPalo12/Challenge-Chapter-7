@@ -8,7 +8,7 @@ const { validResult } = require('../middleware/validation.result.js');
 
 /**
   * @swagger
-  * /user/posta?writer=writerId:
+  * /user/posts/{writerId}:
   *  get:
   *    security:
   *      - bearerAuth : []
@@ -16,10 +16,30 @@ const { validResult } = require('../middleware/validation.result.js');
   *      - posts
   *    summary: Get Post API
   *    parameters:
-  *      - in : query
+  *      - in : path
   *        name: writerId
   *        schema:
   *         type: string
+  *      - in : query
+  *        name : sort
+  *        schema:
+  *         type: string
+  *         example: DESC or ASC
+  *      - in : query
+  *        name : page
+  *        schema:
+  *         type: number
+  *         example: 1
+  *      - in : query
+  *        name : limit
+  *        schema:
+  *         type: number
+  *         example: 5
+  *      - in : query
+  *        name : search
+  *        schema:
+  *         type: string
+  *         example: 'why does my cat?'
   *    responses:
   *      '200':
   *        content:
@@ -27,20 +47,29 @@ const { validResult } = require('../middleware/validation.result.js');
   *            schema:
   *              type: object
   *              properties:
+  *                id:
+  *                  type: number
+  *                  example: 2
   *                title:
   *                  type: string
-  *                image:
+  *                  example: Lorem Ipsum
+  *                image_url:
   *                  type: string
+  *                  example: www.LoremIpsum.com
   *                body:
   *                  type: string
+  *                  example: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque molestie lobortis erat, 
   *                user_id:
   *                  type: number
+  *                  example: 1
   *                updatedAt:
   *                  type: string
+  *                  example: 2022-08-14T15:59:09.950Z
   *                createdAt:
   *                  type: string
+  *                  example: 2022-08-14T15:59:09.950Z
   */
- postRouter.get("/user/posts/:writerId?",verifyToken , postControllers.getPost);
+ postRouter.get("/user/posts/:writerId?", postControllers.getPost);
 
  /**
   * @swagger
@@ -74,18 +103,26 @@ const { validResult } = require('../middleware/validation.result.js');
   *            schema:
   *              type: object
   *              properties:
+  *                id:
+  *                  type: number
+  *                  example: 2
   *                title:
   *                  type: string
-  *                image:
+  *                  example: Lorem Ipsum
+  *                image_url:
   *                  type: string
+  *                  example: www.LoremIpsum.com
   *                body:
   *                  type: string
+  *                  example: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque molestie lobortis erat, 
   *                user_id:
   *                  type: number
+  *                  example: 1
   *                updatedAt:
   *                  type: string
+  *                  example: 2022-08-14T15:59:09.950Z
   *                createdAt:
-  *                  type: string
+  *                  type: 2022-08-14T15:59:09.950Z
   */
 postRouter.post("/user/posts", checkSchema(validators.postValidator), validResult, verifyToken, postControllers.createPost)
 
@@ -123,20 +160,10 @@ postRouter.post("/user/posts", checkSchema(validators.postValidator), validResul
   *        content:
   *          application/json:
   *            schema:
-  *              type: object
-  *              properties:
-  *                title:
-  *                  type: string
-  *                image:
-  *                  type: string
-  *                body:
-  *                  type: string
-  *                user_id:
-  *                  type: number
-  *                updatedAt:
-  *                  type: string
-  *                createdAt:
-  *                  type: string
+  *              type: array
+  *              items:
+  *                type: number
+  *                example: 0
   */
 postRouter.put("/user/posts/:postId", checkSchema(validators.postValidator), validResult, verifyToken, postControllers.updatePost)
 

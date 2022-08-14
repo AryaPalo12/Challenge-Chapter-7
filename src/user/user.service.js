@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt')
 const SALT = 10
 
 const createUser = async (object) => {
-  console.log(object)
   const hashedPassword = await bcrypt.hash(object.password, SALT)
   const newUser = {
     fullname: object.fullname,

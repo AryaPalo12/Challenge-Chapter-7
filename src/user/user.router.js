@@ -24,7 +24,7 @@ const { validResult } = require('../middleware/validation.result.js');
  *                example: Andy Bernard
  *              email:
  *                type: string
- *                example: andythedog@dundermiflin.co,
+ *                example: andythedog@dundermiflin.com
  *              password:
  *                type: string
  *                example: Password@123!
@@ -37,16 +37,22 @@ const { validResult } = require('../middleware/validation.result.js');
  *              properties:
  *                id:
  *                  type: string
+ *                  example: 3
  *                fullname:
  *                  type: string
+ *                  example: Andy Bernard
  *                email:
  *                  type: string
+ *                  example: andythedog@dundermiflin.com
  *                password:
  *                  type: string
+ *                  example: Password@123!
  *                updatedAt:
  *                  type: string
+ *                  example: 2022-08-14T15:59:09.950Z
  *                createdAt:
  *                  type: string
+ *                  example: 2022-08-14T15:59:09.950Z
  */
 userRouter.post('/user/register', checkSchema(validators.registrationValidation),validResult, userControllers.createUser);
 
