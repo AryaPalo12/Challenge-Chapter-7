@@ -6,7 +6,7 @@ const authControllers = require('./auth.controller');
 
 /**
  * @swagger
- * /auth/login:
+ * /v1/auth/login:
  *  post:
  *    tags:
  *      - auth
@@ -35,6 +35,6 @@ const authControllers = require('./auth.controller');
  *                  type: string
  *                  example: fdkaskfjhasfhwibfiwnafkasjndfliuaenowanfiuwankjfanksflia
  */
-authRouter.post('/auth/login', checkSchema(validators.loginValidation), validResult, authControllers.userLogin);
+authRouter.post('/v1/auth/login', checkSchema(validators.loginValidation), validResult, authControllers.userLogin);
 
 module.exports = authRouter;

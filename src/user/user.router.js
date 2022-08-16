@@ -7,7 +7,7 @@ const { validResult } = require('../middleware/validation.result.js');
 
 /**
  * @swagger
- * /user/register:
+ * /v1/user/register:
  *  post:
  *    tags:
  *      - user
@@ -54,11 +54,11 @@ const { validResult } = require('../middleware/validation.result.js');
  *                  type: string
  *                  example: 2022-08-14T15:59:09.950Z
  */
-userRouter.post('/user/register', checkSchema(validators.registrationValidation),validResult, userControllers.createUser);
+userRouter.post('/v1/user/register', checkSchema(validators.registrationValidation),validResult, userControllers.createUser);
 
 /**
  * @swagger
- * /user/{userId}:
+ * /v1/user/{userId}:
  *  put:
  *    security:
  *      - bearerAuth : []
@@ -104,6 +104,6 @@ userRouter.post('/user/register', checkSchema(validators.registrationValidation)
  *                createdAt:
  *                  type: string
  */
-userRouter.put('user/:userId', tokenVerification, userControllers.editUser)
+userRouter.put('/v1/user/:userId', tokenVerification, userControllers.editUser)
 
 module.exports = userRouter;
