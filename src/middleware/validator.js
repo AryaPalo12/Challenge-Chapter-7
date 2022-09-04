@@ -27,7 +27,7 @@ const registrationValidation = {
 const loginValidation = {
   email: {
     in: ['body'],
-    errorMessage: 'Wrong Input',
+    errorMessage: 'Invalid Email',
     isEmail: true,
   },
   password: {
@@ -45,15 +45,6 @@ const postValidator = {
     in: ['body'],
     errorMessage: 'Input a title',
     isString: true,
-    isLength: {
-      options: {min: 1},
-      options: {max: 150}
-    }
-  },
-  imageUrl: {
-    in: ['body'],
-    errorMessage: 'Must be a valid url',
-    isURL: true,
     isLength: {
       options: {min: 1},
       options: {max: 150}

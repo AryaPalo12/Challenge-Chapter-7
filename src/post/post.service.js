@@ -10,6 +10,10 @@ const getPostByWriter = async (writerId) => {
   return await postRepo.getPostByWriter(writerId)
 }
 
+const getSinglePost = async (postId) => {
+  return await postRepo.getSinglePost(postId)
+}
+
 //Will get all post listed
 const getAllPost = async () => {
   return await postRepo.getAllPost();
@@ -43,6 +47,7 @@ const postServices = {
   getAllPost,
   updatePost,
   getPostAditional,
+  getSinglePost,
 }
 
 module.exports = postServices;

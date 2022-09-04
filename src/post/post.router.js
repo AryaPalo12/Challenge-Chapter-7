@@ -65,6 +65,44 @@ const { validResult } = require('../middleware/validation.result.js');
   */
  postRouter.get("/v1/user/posts", postControllers.getAllPost);
 
+ /**
+  * @swagger
+  * /v1/user/posts/single/:postId:
+  *  get:
+  *    tags:
+  *      - posts
+  *    summary: Get single post by id
+  *    responses:
+  *      '200':
+  *        content:
+  *          application/json:
+  *            schema:
+  *              type: object
+  *              properties:
+  *                id:
+  *                  type: number
+  *                  example: 2
+  *                title:
+  *                  type: string
+  *                  example: Lorem Ipsum
+  *                image_url:
+  *                  type: string
+  *                  example: www.LoremIpsum.com
+  *                body:
+  *                  type: string
+  *                  example: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque molestie lobortis erat, 
+  *                user_id:
+  *                  type: number
+  *                  example: 1
+  *                updatedAt:
+  *                  type: string
+  *                  example: 2022-08-14T15:59:09.950Z
+  *                createdAt:
+  *                  type: string
+  *                  example: 2022-08-14T15:59:09.950Z
+  */
+  postRouter.get("/v1/user/posts/single/:postId", postControllers.getSinglePost);
+
 /**
   * @swagger
   * /v1/user/posts/{writerId}:

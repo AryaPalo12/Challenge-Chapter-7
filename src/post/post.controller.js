@@ -1,5 +1,4 @@
 const postServices = require("./post.service");
-const jwt = require('jsonwebtoken');
 
 const getAllPost = async (req,res) => {
   const { search, sort, page, limit } = req.query;
@@ -19,11 +18,22 @@ const getAllPost = async (req,res) => {
 const getPostByWriter = async (req, res) => {
   const writerId = req.params.writerId;
   try {
-      const postfound = await postServices.getPostByWriter(params.writerId);
+      const postfound = await postServices.getPostByWriter(writerId);
       return res.json(postfound)
     } 
   catch (error) {
     res.status(404).send('Post for this writer is not found')
+  }
+}
+
+const getSinglePost = async (req, res) => {
+  const postId = req.params.postId;
+  try {
+      const postfound = await postServices.getSinglePost(postId);
+      return res.json(postfound)
+    } 
+  catch (error) {
+    res.status(404).send('Post not found.')
   }
 }
 
@@ -60,7 +70,8 @@ const postControllers = {
   getAllPost,
   getPostByWriter,
   createPost,
-  updatePost
+  updatePost,
+  getSinglePost,
 }
 
 module.exports = postControllers;

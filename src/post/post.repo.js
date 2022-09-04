@@ -5,7 +5,7 @@ const { Op } = require('sequelize')
 const createPost = async (title, imageUrl, body, user_id) => {
   return await Posts.create({
     title,
-    image_url: imageUrl,
+    imageUrl,
     body,
     user_id
   });
@@ -27,6 +27,10 @@ const getPostByWriter = async (user_id) => {
   return await Posts.findAll({ where: {user_id}, raw: true})
 }
 
+const getSinglePost = async (postId) => {
+  return await Posts.findOne({ where: {id: postId}, raw: true})
+}
+
 //Repo function to find post to update
 const getOnePost = async (id) => {
   return await Posts.findOne({ where: { id }, raw: true })
@@ -40,7 +44,7 @@ const updatePost = async (id, title, imageUrl, body) => {
   return await Posts.update(
     {
       title,
-      image_url: imageUrl,
+      imageUrl,
       body
     },
     {
@@ -58,6 +62,7 @@ const postRepo = {
   updatePost,
   getPostByWriter,
   getPostAditional,
+  getSinglePost,
 }
 
 module.exports = postRepo;
